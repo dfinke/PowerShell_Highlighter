@@ -22,23 +22,36 @@ function test {
 
 $r = Invoke-ParseScript $testScript
 
-function LookupColor ($kind) {
-    switch ($kind) {
-        'Identifier' {'Red'}
-        default      {'default'}
-    }
-}
-
 function TagStuff {
     param(
         [Parameter(ValueFromPipeline)]
         $Token
     )
 
-    Process {
-        $token |
-            add-member -passthru NoteProperty Color (LookupColor $Token.Kind)
+    Begin {
+        $ColorMap = @{
+            'Identifier' = 'Red'
+        }
 
+        $LookupColor = {
+
+            switch ($args[0]) {
+                'Identifier' {'Red'}
+                default      {'default'}
+            }
+        }
+    }
+
+    Process {
+
+        $token |
+            add-member -passthru NoteProperty Color (& $LookupColor $Token.Kind.ToString())
+
+        #$color = $ColorMap.($Token.Kind.ToString())
+        #if(!$color) {$color = 'default'}
+
+        #$token |
+        #    add-member -passthru NoteProperty Color $Color
     }
 }
 
