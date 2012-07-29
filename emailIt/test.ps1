@@ -1,9 +1,6 @@
 #require version 3
 
-$path   = Split-Path   (Resolve-Path $MyInvocation.InvocationName)
-$script = Resolve-Path (join-path $path ..\core\InvokeParseScript.ps1)
-
-. $script
+. .\InvokeParseScript.ps1
 
 $testScript = @'
 function test {
@@ -33,6 +30,7 @@ function TagStuff {
     }
 }
 
-$ast  = $r.ast
-$text = $r.ast.Extent.Text
-$list = $r.ListOfTokens | TagStuff 
+#$ast  = $r.ast
+#$text = $r.ast.Extent.Text
+#$list = $r.ListOfTokens | TagStuff
+$r.ListOfTokens | TagStuff | ft
