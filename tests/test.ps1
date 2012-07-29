@@ -1,6 +1,9 @@
 #require version 3
 
-. ..\core\InvokeParseScript.ps1
+$path   = Split-Path (Resolve-Path $MyInvocation.InvocationName)
+$script = Resolve-Path (join-path $path ..\core\InvokeParseScript.ps1)
+
+. $script
 
 $script = @'
 function test {

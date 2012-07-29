@@ -1,4 +1,4 @@
-#requires -version 3
+#require -version 3
 
 function Invoke-ParseScript  {
     <#
