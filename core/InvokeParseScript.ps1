@@ -37,10 +37,12 @@ function Invoke-ParseScript  {
             ForEach($token in $this.Tokens) {
                 $Extent = $token.Extent
                 [PSCustomObject] @{
-                    Text        = $token.Text
-                    Kind        = $token.Kind
-                    StartOffset = $Extent.StartOffset
-                    EndOffset   = $Extent.EndOffset
+                    Text              = $token.Text
+                    Kind              = $token.Kind
+                    StartOffset       = $Extent.StartOffset
+                    EndOffset         = $Extent.EndOffset
+                    StartLineNumber   = $Extent.StartLineNumber
+                    StartColumnNumber = $Extent.StartColumnNumber
                 }
             }
         } |
